@@ -3,12 +3,16 @@
 }
 
 .current-weather {
-	background-color: aquamarine;
 	border-style: solid;
 	border-radius: 10px;
 	border-width: 2px;
 	border-color: darkgrey;
 	line-height: 150%;
+}
+
+.card {
+	background-color: #06aed5;
+	color: white;
 }
 
 .card-img-top {
@@ -17,4 +21,14 @@
 
 .current-weather-image {
 	width: 12rem;
+}
+
+.form-control {
+	width: 13rem;
+}
+
+.searchBtn {
+	background-color: #06aed5;
+	color: white;
+	border-radius: 5px;
 }
