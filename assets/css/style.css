@@ -1,3 +1,20 @@
 .navbar-brand {
 	font-size: 30px;
 }
+
+.current-weather {
+	background-color: aquamarine;
+	border-style: solid;
+	border-radius: 10px;
+	border-width: 2px;
+	border-color: darkgrey;
+	line-height: 150%;
+}
+
+.card-img-top {
+	width: 7rem;
+}
+
+.current-weather-image {
+	width: 12rem;
+}
