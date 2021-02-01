@@ -19,6 +19,10 @@
 	width: 7rem;
 }
 
+.card-body {
+	font-size: 14px;
+}
+
 .current-weather-image {
 	width: 12rem;
 }
