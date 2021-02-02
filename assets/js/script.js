@@ -29,7 +29,7 @@ $(document).ready(function () {
             lat = response.coord.lat;
             lon = response.coord.lon;
 
-            setUV();
+            oneCall();
 
             $("#name-date").text(cityName + "  (" + currentDate + ")");
             $("#current-temp").text(currentTemp);
@@ -40,8 +40,8 @@ $(document).ready(function () {
         })
     }
 
-    function setUV() {
-        var exclude = "miuntely,hourly,daily,alerts";
+    function oneCall() {
+        var exclude = "miuntely,hourly,alerts";
         var APIKey = "cd1360e64dac90fdead91678a4865808";
         var input = $(".searchBar").val();
         var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=" + exclude + "&appid=" + APIKey;
@@ -69,6 +69,17 @@ $(document).ready(function () {
                 $("#current-uv").addClass("UVred");
             }
 
+            var results = response.daily;
+            console.log(results);
+            
+            for (var i = 1; i < 6; i++) {
+
+                var temp = Math.floor(((results[i].temp.day)-273.15) * 1.80 + 32);
+                var humidity = results[i].humidity;
+
+                console.log(humidity);
+            }
+
 
         });
 
@@ -79,27 +90,27 @@ $(document).ready(function () {
 
     }
 
-    function setForecast() {
-        var APIKey = "cd1360e64dac90fdead91678a4865808";
-        var input = $(".searchBar").val();
-        var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + input + "&appid=" + APIKey;
+    // function setForecast() {
+    //     var APIKey = "cd1360e64dac90fdead91678a4865808";
+    //     var input = $(".searchBar").val();
+    //     var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + input + "&appid=" + APIKey;
 
-        console.log("input: " + input);
+    //     console.log("input: " + input);
 
-        $.ajax({
-            url: queryURL,
-            method: "GET"
-        }).then(function(response) {
+    //     $.ajax({
+    //         url: queryURL,
+    //         method: "GET"
+    //     }).then(function(response) {
 
-            console.log(response);
+    //         console.log(response);
 
-            // var currentTempu = Math.floor(((response.main.temp)-273.15) * 1.80 + 32);
-            // var currentHumidityu = response.main.humidity;
+    //         // var temp = Math.floor(((response.main.temp)-273.15) * 1.80 + 32);
+    //         // var humidity = response.main.humidity;
 
  
 
-        });   
-    }
+    //     });   
+    // }
 
 
 
@@ -108,7 +119,6 @@ $(document).ready(function () {
     $(".searchBtn").on("click", function () {
         
         setCurrentWeather();
-        setForecast();
 
 
     });
