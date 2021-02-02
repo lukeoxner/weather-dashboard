@@ -56,13 +56,13 @@ $(document).ready(function () {
             $("#current-uv").text(currentUV);
 
             if (currentUV <= 3) {
-                $("#current-uv").addClass("UVgreen");
                 $("#current-uv").removeClass("UVyellow");
                 $("#current-uv").removeClass("UVred");
+                $("#current-uv").addClass("UVgreen");
             } else if (currentUV > 3 && currentUV <= 6) {
                 $("#current-uv").removeClass("UVgreen");
-                $("#current-uv").addClass("UVyellow");
                 $("#current-uv").removeClass("UVred");
+                $("#current-uv").addClass("UVyellow");
             } else {
                 $("#current-uv").removeClass("UVgreen");
                 $("#current-uv").removeClass("UVyellow");
