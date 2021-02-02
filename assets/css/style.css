@@ -36,3 +36,23 @@
 	color: white;
 	border-radius: 5px;
 }
+
+.UVgreen {
+	background-color: green;
+}
+
+.UVyellow {
+	background-color: yellow;
+}
+
+.UVorange {
+	background-color: orange;
+}
+
+.UVred {
+	background-color: red;
+}
+
+.UVpurple {
+	background-color: purple;
+}
