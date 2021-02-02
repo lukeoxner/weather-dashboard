@@ -57,9 +57,15 @@ $(document).ready(function () {
 
             if (currentUV <= 3) {
                 $("#current-uv").addClass("UVgreen");
+                $("#current-uv").removeClass("UVyellow");
+                $("#current-uv").removeClass("UVred");
             } else if (currentUV > 3 && currentUV <= 6) {
+                $("#current-uv").removeClass("UVgreen");
                 $("#current-uv").addClass("UVyellow");
+                $("#current-uv").removeClass("UVred");
             } else {
+                $("#current-uv").removeClass("UVgreen");
+                $("#current-uv").removeClass("UVyellow");
                 $("#current-uv").addClass("UVred");
             }
 
