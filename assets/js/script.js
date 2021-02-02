@@ -41,29 +41,26 @@ $(document).ready(function () {
     }
 
     function setUV() {
+        var exclude = "miuntely,hourly,daily,alerts";
         var APIKey = "cd1360e64dac90fdead91678a4865808";
         var input = $(".searchBar").val();
-        var queryURL = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey;
+        var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=" + exclude + "&appid=" + APIKey;
 
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function(response) {
 
-            var currentUV = response.value;
+            var currentUV = response.current.uvi;
             
             $("#current-uv").text(currentUV);
 
-            if (currentUV <= 2) {
+            if (currentUV <= 3) {
                 $("#current-uv").addClass("UVgreen");
-            } else if (currentUV > 2 && currentUV <= 5) {
+            } else if (currentUV > 3 && currentUV <= 6) {
                 $("#current-uv").addClass("UVyellow");
-            } else if (currentUV > 5 && currentUV <= 7) {
-                $("#current-uv").addClass("UVyellow");
-            } else if (currentUV > 7 && currentUV <= 10) {
-                $("#current-uv").addClass("UVred");
             } else {
-                $("#current-uv").addClass("UVpurple");
+                $("#current-uv").addClass("UVred");
             }
 
 
