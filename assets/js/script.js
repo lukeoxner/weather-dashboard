@@ -14,8 +14,6 @@ $(document).ready(function () {
         var input = $(".searchBar").val();
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + input + "&appid=" + APIKey;
 
-        console.log("input: " + input);
-
         $.ajax({
             url: queryURL,
             method: "GET"
@@ -31,8 +29,6 @@ $(document).ready(function () {
             lat = response.coord.lat;
             lon = response.coord.lon;
 
-            console.log(lat);
-            console.log(lon);
             setUV();
 
             $("#name-date").text(cityName + "  (" + currentDate + ")");
@@ -49,14 +45,10 @@ $(document).ready(function () {
         var input = $(".searchBar").val();
         var queryURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey;
 
-        console.log("input: " + input);
-
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function(response) {
-
-            console.log(response);
 
             var currentUV = response.value;
             
@@ -75,7 +67,7 @@ $(document).ready(function () {
             }
 
 
-        })
+        });
 
 
 
@@ -84,7 +76,27 @@ $(document).ready(function () {
 
     }
 
+    function setForecast() {
+        var APIKey = "cd1360e64dac90fdead91678a4865808";
+        var input = $(".searchBar").val();
+        var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + input + "&appid=" + APIKey;
 
+        console.log("input: " + input);
+
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function(response) {
+
+            console.log(response);
+
+            // var currentTempu = Math.floor(((response.main.temp)-273.15) * 1.80 + 32);
+            // var currentHumidityu = response.main.humidity;
+
+ 
+
+        });   
+    }
 
 
 
@@ -93,10 +105,10 @@ $(document).ready(function () {
     $(".searchBtn").on("click", function () {
         
         setCurrentWeather();
-        // setForecast();
+        setForecast();
 
 
-    })
+    });
 
 
 
