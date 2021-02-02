@@ -35,7 +35,7 @@ $(document).ready(function () {
             $("#current-temp").text(currentTemp);
             $("#current-humidity").text(currentHumidity);
             $("#current-wind").text(currentWind);
-            $(".current-weather-image").attr("src", "http://openweathermap.org/img/wn/" + currentIcon + "@2x.png");
+            $(".current-weather-image").attr("src", "https://openweathermap.org/img/wn/" + currentIcon + "@2x.png");
 
         })
     }
@@ -43,7 +43,7 @@ $(document).ready(function () {
     function setUV() {
         var APIKey = "cd1360e64dac90fdead91678a4865808";
         var input = $(".searchBar").val();
-        var queryURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey;
+        var queryURL = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey;
 
         $.ajax({
             url: queryURL,
