@@ -54,10 +54,11 @@ $(document).ready(function () {
             method: "GET"
         }).then(function(response) {
 
+            // declaring currentUV variable and assigning value from API data
             var currentUV = response.current.uvi;
-            
             $("#current-uv").text(currentUV);
 
+            // use if-else statements to color the UV index area based on UV severity
             if (currentUV <= 3) {
                 $("#current-uv").removeClass("UVyellow");
                 $("#current-uv").removeClass("UVred");
@@ -74,19 +75,21 @@ $(document).ready(function () {
 
             var results = response.daily;
 
+            // clear existing 5-day forecast if the user has already done a different city
             $(".5-day-forecast").empty();
             
+            // use for loop to set up each day of the 5 day forecast
             for (var i = 1; i < 6; i++) {
 
                 var temp = Math.floor(((results[i].temp.day)-273.15) * 1.80 + 32);
                 var humidity = results[i].humidity;
                 var icon = results[i].weather[0].icon;
-                
+                // convert unix date from API into a more useful format
                 var unixDate = ((results[i].dt) * 1000);
                 var dateObject = new Date(unixDate);
                 var formattedDate = (dateObject.toLocaleString()).split(",");             
 
-
+                // append the new forecast card into the 5 day forecast element
                 $(".5-day-forecast").append(`
                 <div class="card m-2 p-1" style="width: 9rem;">
                     <img src="https://openweathermap.org/img/wn/${icon}@2x.png" class="card-img-top" alt="weather icon">
@@ -105,14 +108,14 @@ $(document).ready(function () {
 
     }
 
+    // declaring function to add button for the previously searched city
     function setSearchHistory() {
         $(".search-history").prepend(`
             <button class="historyItem" data-city="${city}">${city}</button>
         `)
     }
 
-
-
+    // set up event listener for the search button
     $(".searchBtn").on("click", function () {
         
         input = $(".searchBar").val();
@@ -130,7 +133,7 @@ $(document).ready(function () {
 
 
 
-
+    // set up event listener to enable the user to click on their previously searched cities
     $(".search-history").on("click", function (event) {
 
         input = event.target.getAttribute("data-city");
@@ -139,12 +142,4 @@ $(document).ready(function () {
 
     })
 
-
-
-
-
-
-
-
-
-});     // ending of document.ready
+});     // ending of document.ready function
