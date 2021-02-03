@@ -1,3 +1,4 @@
+// declaring variables in global memory
 var searchHistory = [];
 var lastCity;
 var lat;
@@ -6,21 +7,21 @@ var currentDate = moment().format("l");
 var input;
 
 
-
+// ensuring document is fully rendered before running javascript
 $(document).ready(function () {
 
-    
+    // declare function used to set the current weather
     function setCurrentWeather() {
         var APIKey = "cd1360e64dac90fdead91678a4865808";
-
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + input + "&appid=" + APIKey;
 
+        // using ajax call to get data from the API
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function(response) {
 
-
+            // declaring local variables and getting their values from the API data
             var cityName = response.name;
             var currentTemp = Math.floor(((response.main.temp)-273.15) * 1.80 + 32);
             var currentHumidity = response.main.humidity;
@@ -29,8 +30,10 @@ $(document).ready(function () {
             lat = response.coord.lat;
             lon = response.coord.lon;
 
+            // execute oneCall function to set UV index and 5-day forecasts
             oneCall();
 
+            // change the HTML elements to reflect the current weather values
             $("#name-date").text(cityName + "  (" + currentDate + ")");
             $("#current-temp").text(currentTemp);
             $("#current-humidity").text(currentHumidity);
@@ -40,6 +43,7 @@ $(document).ready(function () {
         })
     }
 
+    // declaring oneCall function used for setting current UV index and the 5 day forecast
     function oneCall() {
         var exclude = "miuntely,hourly,alerts";
         var APIKey = "cd1360e64dac90fdead91678a4865808";
