@@ -1,8 +1,9 @@
-var searchHistory;
+var searchHistory = [];
 var lastCity;
 var lat;
 var lon;
 var currentDate = moment().format("l");
+var input;
 
 
 
@@ -11,7 +12,7 @@ $(document).ready(function () {
     
     function setCurrentWeather() {
         var APIKey = "cd1360e64dac90fdead91678a4865808";
-        var input = $(".searchBar").val();
+
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + input + "&appid=" + APIKey;
 
         $.ajax({
@@ -100,20 +101,39 @@ $(document).ready(function () {
 
     }
 
+    function setSearchHistory() {
+        $(".search-history").prepend(`
+            <button class="historyItem" data-city="${city}">${city}</button>
+        `)
+    }
+
+
 
     $(".searchBtn").on("click", function () {
         
-        setCurrentWeather();
-        lastCity = $(".searchBar").val();
-        $(searchHistory).push(lastCity);
+        input = $(".searchBar").val();
 
-        console.log(lastCity);
+        setCurrentWeather();
+
+        city = $(".searchBar").val();
+        searchHistory.unshift({city});
+        localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+        $(".searchBar").val("");
+        
+        setSearchHistory(city);
+
     });
 
 
 
 
+    $(".search-history").on("click", function (event) {
 
+        input = event.target.getAttribute("data-city");
+
+        setCurrentWeather();
+
+    })
 
 
 
