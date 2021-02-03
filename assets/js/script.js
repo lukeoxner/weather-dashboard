@@ -1,8 +1,8 @@
-
+var searchHistory;
+var lastCity;
 var lat;
 var lon;
 var currentDate = moment().format("l");
-console.log(currentDate);
 
 
 
@@ -19,7 +19,6 @@ $(document).ready(function () {
             method: "GET"
         }).then(function(response) {
 
-            // console.log(response);
 
             var cityName = response.name;
             var currentTemp = Math.floor(((response.main.temp)-273.15) * 1.80 + 32);
@@ -43,7 +42,6 @@ $(document).ready(function () {
     function oneCall() {
         var exclude = "miuntely,hourly,alerts";
         var APIKey = "cd1360e64dac90fdead91678a4865808";
-        var input = $(".searchBar").val();
         var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=" + exclude + "&appid=" + APIKey;
 
         $.ajax({
@@ -70,7 +68,8 @@ $(document).ready(function () {
             }
 
             var results = response.daily;
-            console.log(results);
+
+            $(".5-day-forecast").empty();
             
             for (var i = 1; i < 6; i++) {
 
@@ -95,51 +94,20 @@ $(document).ready(function () {
                 </div>
                 `);
 
-
-                console.log(humidity);
             }
-
 
         });
 
-
-
-
-
-
     }
-
-    // function setForecast() {
-    //     var APIKey = "cd1360e64dac90fdead91678a4865808";
-    //     var input = $(".searchBar").val();
-    //     var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + input + "&appid=" + APIKey;
-
-    //     console.log("input: " + input);
-
-    //     $.ajax({
-    //         url: queryURL,
-    //         method: "GET"
-    //     }).then(function(response) {
-
-    //         console.log(response);
-
-    //         // var temp = Math.floor(((response.main.temp)-273.15) * 1.80 + 32);
-    //         // var humidity = response.main.humidity;
-
- 
-
-    //     });   
-    // }
-
-
-
 
 
     $(".searchBtn").on("click", function () {
         
         setCurrentWeather();
+        lastCity = $(".searchBar").val();
+        $(searchHistory).push(lastCity);
 
-
+        console.log(lastCity);
     });
 
 

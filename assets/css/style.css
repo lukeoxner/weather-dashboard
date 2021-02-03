@@ -48,3 +48,8 @@
 .UVred {
 	background-color: red;
 }
+
+.historyItem {
+	border-style: solid;
+	width: 200px;
+}
