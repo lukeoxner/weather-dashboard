@@ -76,6 +76,25 @@ $(document).ready(function () {
 
                 var temp = Math.floor(((results[i].temp.day)-273.15) * 1.80 + 32);
                 var humidity = results[i].humidity;
+                var icon = results[i].weather[0].icon;
+                
+                var unixDate = ((results[i].dt) * 1000);
+                var dateObject = new Date(unixDate);
+                var formattedDate = (dateObject.toLocaleString()).split(",");             
+
+
+                $(".5-day-forecast").append(`
+                <div class="card m-2 p-1" style="width: 9rem;">
+                    <img src="https://openweathermap.org/img/wn/${icon}@2x.png" class="card-img-top" alt="weather icon">
+                    <div class="card-body">
+                    <h5>${formattedDate[0]}</h5>
+                    <br>
+                    <p>Temp: ${temp} *F</p>
+                    <p>Humidity: ${humidity}%</p>
+                    </div>
+                </div>
+                `);
+
 
                 console.log(humidity);
             }
