@@ -6,7 +6,6 @@ var lon;
 var currentDate = moment().format("l");
 var input;
 
-
 // ensuring document is fully rendered before running javascript
 $(document).ready(function () {
 
@@ -16,14 +15,10 @@ $(document).ready(function () {
         
         lastCity = searches[0].city;
 
-        console.log(lastCity); 
-
         input = lastCity;
 
         setCurrentWeather();
     }
-
-    console.log(searches);
 
     // declare function used to set the current weather
     function setCurrentWeather() {
@@ -123,11 +118,25 @@ $(document).ready(function () {
 
     }
 
-    // declaring function to add button for the previously searched city
+    // declaring function to add button for the previously searched cities
     function setSearchHistory() {
-        $(".search-history").prepend(`
-            <button class="historyItem" data-city="${city}">${city}</button>
-        `)
+
+        var searches = JSON.parse(localStorage.getItem('searchHistory') || '[]');
+
+        console.log(searches);
+
+        $(".search-history").empty();
+
+        var i = (searches.length) - 1;
+
+        $(searches).each(function() {
+            city = searches[i].city;
+            $(".search-history").prepend(`
+            <button class="historyItem" data-city="${city}">${city}</button>`)
+            i--;
+        })
+
+        
     }
 
     // set up event listener for the search button
@@ -142,7 +151,7 @@ $(document).ready(function () {
         localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
         $(".searchBar").val("");
         
-        setSearchHistory(city);
+        setSearchHistory();
 
     });
 
@@ -156,5 +165,7 @@ $(document).ready(function () {
         setCurrentWeather();
 
     })
+
+    setSearchHistory();
 
 });     // ending of document.ready function
