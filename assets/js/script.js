@@ -10,6 +10,21 @@ var input;
 // ensuring document is fully rendered before running javascript
 $(document).ready(function () {
 
+    var searches = JSON.parse(localStorage.getItem('searchHistory') || '[]');
+
+    if (searches[0] !== undefined) {
+        
+        lastCity = searches[0].city;
+
+        console.log(lastCity); 
+
+        input = lastCity;
+
+        setCurrentWeather();
+    }
+
+    console.log(searches);
+
     // declare function used to set the current weather
     function setCurrentWeather() {
         var APIKey = "cd1360e64dac90fdead91678a4865808";
